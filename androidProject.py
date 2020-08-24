@@ -76,12 +76,20 @@ def launch(projectname="", html_folder=None, logo_folder=None):
 
     # replace string in file
     fileinout_list = [
+        os.path.join(projectname, projectname + ".iml"),
+        os.path.join(projectname, "app", "src", "main", "res", "values", "strings.xml")
+        ]
+    for fileinout in fileinout_list:
+        replace_str_in_file(fileinout, TEMPLATEPROJECTNAME, projectname)
+
+    # replace lower string in file
+    fileinout_list_lower = [
         os.path.join(projectname, "app", "build.gradle"),
         os.path.join(projectname, "app", "src", "main", "AndroidManifest.xml"),
         os.path.join(projectname, "app", "src", "main", "java", "com", projectname.lower(), "MainActivity.java"),
         os.path.join(projectname, "app", "src", "main", "res", "layout", "activity_main.xml")
     ]
-    for fileinout in fileinout_list:
+    for fileinout in fileinout_list_lower:
         replace_str_in_file(fileinout, TEMPLATEPROJECTNAME.lower(), projectname.lower())
 
     # launch compilation
